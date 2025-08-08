@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "departments", indexes = {
-    @Index(name = "idx_name", columnList = "name")
+        @Index(name = "idx_name", columnList = "name")
 })
 @EntityListeners(AuditingEntityListener.class)
 public class Department {
@@ -43,18 +43,15 @@ public class Department {
     private LocalDateTime updatedAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_departments",
-        joinColumns = @JoinColumn(name = "department_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @JoinTable(name = "user_departments", joinColumns = @JoinColumn(name = "department_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users = new HashSet<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Message> messages = new HashSet<>();
 
     // Constructors
-    public Department() {}
+    public Department() {
+    }
 
     public Department(String name, String description) {
         this.name = name;
@@ -62,29 +59,69 @@ public class Department {
     }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getName() {
+        return name;
+    }
 
-    public User getManager() { return manager; }
-    public void setManager(User manager) { this.manager = manager; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getDescription() {
+        return description;
+    }
 
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public Set<User> getUsers() { return users; }
-    public void setUsers(Set<User> users) { this.users = users; }
+    public User getManager() {
+        return manager;
+    }
 
-    public Set<Message> getMessages() { return messages; }
-    public void setMessages(Set<Message> messages) { this.messages = messages; }
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
 
     public void addUser(User user) {
         this.users.add(user);
