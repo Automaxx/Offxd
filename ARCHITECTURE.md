@@ -4,19 +4,20 @@ Below is the system architecture in Mermaid format.
 
 ```mermaid
 graph LR
-    subgraph Context
-        User["User"]
+    subgraph Users
+        User["Users/Clients"]
     end
-    
+
     subgraph Frontend
         ReactApp["React Frontend"]
         style ReactApp fill:#e1f5fe
     end
 
     subgraph Backend
-        SpringBootApp["Spring Boot Backend"]
-        style SpringBootApp fill:#f3e5f5
+        SpringBootAPI["Spring Boot API"]
+        style SpringBootAPI fill:#f3e5f5
         SpringDataJPA["Spring Data JPA"]
+        style SpringDataJPA fill:#f3e5f5
     end
 
     subgraph DataStores
@@ -24,8 +25,8 @@ graph LR
         style Database fill:#e8f5e8
     end
 
-    User --> ReactApp
-    ReactApp -->|HTTP/REST| SpringBootApp
-    SpringBootApp -->|DB Driver| Database
-    SpringBootApp -.-> SpringDataJPA
+    User -->|HTTP| ReactApp
+    ReactApp -->|HTTP/REST| SpringBootAPI
+    SpringBootAPI -->|DB Driver| Database
+    SpringBootAPI -.-> SpringDataJPA
 ```
