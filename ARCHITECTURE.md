@@ -3,28 +3,30 @@
 Below is the system architecture in Mermaid format.
 
 ```mermaid
-flowchart LR
+graph LR
+    subgraph Users
+        User["Users/Clients"]
+    end
+    
     subgraph Frontend
-        A[React App<br/>(Material UI, React Router)] --> B(HTTP/REST);
+        ReactApp["React Frontend"]
+        style ReactApp fill:#e1f5fe
     end
-    subgraph Backend/Services
-        B[Spring Boot API<br/>(Java, Spring Data JPA)] --> C(DB Driver);
-        B --> D((Lazy Loading));
+
+    subgraph Backend
+        SpringBootApp["Spring Boot Backend"]
+        SpringDataJPA["Spring Data JPA"]
+        style SpringBootApp fill:#f3e5f5
+        style SpringDataJPA fill:#f3e5f5
     end
-    subgraph Data Stores
-        C[SQL Database];
+
+    subgraph DataStores
+        Database["SQL Database"]
+        style Database fill:#e8f5e8
     end
-    subgraph CI/CD
-        style CI/CD fill:#f9f,stroke:#333,stroke-width:2px
-        subgraph "No CI/CD Pipeline"
-            Z[Manual Deployment]
-        end
-    end
-    
-    A --> B;
-    
-    
-    style A fill:#ccf,stroke:#333,stroke-width:2px
-    style B fill:#ccf,stroke:#333,stroke-width:2px
-    style C fill:#ccf,stroke:#333,stroke-width:2px
+
+    User -->|HTTP| ReactApp
+    ReactApp -->|HTTP/REST| SpringBootApp
+    SpringBootApp -->|DB driver| SpringDataJPA
+    SpringDataJPA -->|SQL| Database
 ```
